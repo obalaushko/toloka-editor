@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+	"test": "vitest"
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.10",
@@ -15,6 +16,8 @@
     "allotment": "^1.20.2",
     "dexie": "^4.0.8",
     "dexie-react-hooks": "^1.1.7",
+    "domhandler": "^5.0.3",
+    "htmlparser2": "^9.1.0",
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.3.1",
@@ -25,6 +28,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/domhandler": "^2.4.5",
+    "@types/htmlparser2": "^3.10.7",
     "@types/node": "^22.5.4",
     "@types/react": "18.2.19",
     "@types/react-dom": "^18.3.0",
@@ -40,6 +45,7 @@
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vitest": "^2.1.1"
   }
 }

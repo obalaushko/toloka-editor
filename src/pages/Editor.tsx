@@ -6,7 +6,7 @@ const EditorPage = () => {
 	const [fullScreen, setFullScreen] = useState<boolean>(false);
 
 	return (
-		<div className="mt-16 h-screen">
+		<div className="h-screen pt-16 pb-16">
 			<div className="controlpanel">
 				<IconButton onClick={() => setFullScreen((state) => !state)}>Full</IconButton>
 			</div>
@@ -14,6 +14,9 @@ const EditorPage = () => {
 				<Allotment.Pane minSize={200} maxSize={350} visible={!fullScreen}>
 					<div>
 						<h2 className="text-xl text-redbull-white m-4">Компоненти</h2>
+						<div className="list-components px-5">
+							<span className="bold font-black">BOLD</span>
+						</div>
 					</div>
 				</Allotment.Pane>
 				<Allotment.Pane visible={!fullScreen}>

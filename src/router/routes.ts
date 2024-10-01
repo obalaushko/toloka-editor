@@ -1,5 +1,4 @@
 export const routes = {
-    home: '*/',
     welcome: '/',
 	editor: '/editor',
     notFound: '*',

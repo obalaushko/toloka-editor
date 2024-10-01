@@ -5,7 +5,9 @@ const LayoutBase = () => {
 	return (
 		<div className="web-app">
 			<NavBar />
-			<Outlet />
+			<div className="page-content">
+				<Outlet />
+			</div>
 		</div>
 	)
 }
