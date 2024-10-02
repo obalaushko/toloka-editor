@@ -20,6 +20,8 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 
+		"typeRoots": ["./node_modules/@types", "./src/types"],
+
 		/* Custom */
 		"baseUrl": "./",
 		"paths": {
