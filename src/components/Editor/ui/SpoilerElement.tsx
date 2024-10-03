@@ -4,10 +4,14 @@ import { Transforms } from 'slate'
 import { Collapse, IconButton } from '@material-tailwind/react'
 import { SpoilerElementType } from '@/types/custom-types.js'
 import { moveCursorToNextLine } from '../utils/editorUtils.ts'
+
+import classNames from 'classnames'
+import { MdKeyboardArrowRight, MdDeleteForever } from 'react-icons/md'
+
 export const SpoilerElement: React.FC<RenderElementProps> = (props) => {
 	const { attributes, children, element } = props
 	const editor = useSlateStatic()
-	const [isVisible, setIsVisible] = useState(false)
+	const [isVisible, setIsVisible] = useState(true)
 	const [isHovering, setIsHovering] = useState(false)
 
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -58,15 +62,22 @@ export const SpoilerElement: React.FC<RenderElementProps> = (props) => {
 			{/* Заголовок спойлера */}
 			<div
 				contentEditable={false}
-				className={`flex items-center rounded p-1 ${
-					isHovering ? 'bg-gray-100' : 'bg-transparent'
-				}`}
+				className={classNames(
+					'flex items-center rounded p-1',
+					isHovering || isVisible
+						? 'bg-tolokaDark-mixed_40'
+						: 'bg-transparent'
+				)}
 			>
 				{/* Кнопка видалення */}
 				<IconButton
-					className={`mr-2 transition-all ${
-						isHovering ? 'opacity-100' : 'opacity-0'
-					}`}
+					className={classNames(
+						'mr-2 text-gray-500 transition-all duration-300 hover:text-red-500',
+						{
+							'opacity-100': isHovering || isVisible,
+							'opacity-0': !isHovering && !isVisible,
+						}
+					)}
 					size="sm"
 					variant="text"
 					onClick={(e) => {
@@ -75,13 +86,14 @@ export const SpoilerElement: React.FC<RenderElementProps> = (props) => {
 						Transforms.removeNodes(editor, { at: path })
 					}}
 				>
-					<i className="fas fa-trash text-gray-500 hover:text-red-500"></i>
+					<MdDeleteForever className="text-xl" />
 				</IconButton>
 				{/* Іконка сховати/показати */}
 				<IconButton
-					className={`mr-2 transition-all ${
-						isHovering ? 'opacity-100' : 'opacity-0'
-					}`}
+					className={classNames('mr-2 transition-all', {
+						'opacity-100': isHovering || isVisible,
+						'opacity-0': !isHovering && !isVisible,
+					})}
 					size="sm"
 					variant="text"
 					onClick={(e) => {
@@ -89,11 +101,15 @@ export const SpoilerElement: React.FC<RenderElementProps> = (props) => {
 						setIsVisible(!isVisible)
 					}}
 				>
-					{isVisible ? (
-						<i className="fas fa-chevron-down text-gray-500" />
-					) : (
-						<i className="fas fa-chevron-right text-gray-500" />
-					)}
+					<MdKeyboardArrowRight
+						className={classNames(
+							'text-2xl text-gray-500 transition-all duration-300',
+							{
+								'rotate-90': isVisible,
+								'rotate-0': !isVisible,
+							}
+						)}
+					/>
 				</IconButton>
 
 				{/* Заголовок, який можна редагувати */}
@@ -103,18 +119,18 @@ export const SpoilerElement: React.FC<RenderElementProps> = (props) => {
 					onChange={handleTitleChange}
 					onKeyDown={(e) => {
 						if (e.key === 'Enter') {
-						  e.preventDefault()
-						  moveCursorToNextLine(editor, element) // Використовуємо функцію
+							e.preventDefault()
+							moveCursorToNextLine(editor, element) // Використовуємо функцію
 						}
-					  }}
-					className="w-full border-0 bg-transparent text-lg font-bold placeholder-gray-400 outline-none"
+					}}
+					className="w-full border-0 bg-transparent text-lg font-bold placeholder-gray-500 outline-none"
 					placeholder="Заголовок спойлера"
 				/>
 			</div>
 
 			{/* Вміст спойлера */}
 			<Collapse open={isVisible}>
-				<div className="mt-2 border-l-2 border-gray-300 pl-4 pt-2">
+				<div className="mt-2 cursor-text border-l-2 border-gray-400 pt-2">
 					{children}
 				</div>
 			</Collapse>

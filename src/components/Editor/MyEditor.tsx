@@ -15,7 +15,9 @@ import Toolbar from './ui/Toolbar.tsx'
 import { handleKeyDown } from './utils/editorUtils.ts'
 import { SpoilerElement } from './ui/SpoilerElement.tsx'
 import { ElementWithActions } from './ui/ElementWithActions.tsx'
-import { withHistory } from 'slate-history';
+import { withHistory } from 'slate-history'
+
+
 
 const initialValue: Descendant[] = [
 	{
@@ -58,10 +60,13 @@ const MyEditor: React.FC = () => {
 	}, [])
 
 	return (
-		<Slate editor={editor} initialValue={initialValue}>
+		<Slate
+			editor={editor}
+			initialValue={initialValue}
+		>
 			<Toolbar />
 			<Editable
-				className="h-full min-h-[200px] overflow-y-auto overflow-x-hidden rounded-md border border-gray-300 bg-white p-4 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+				className="editable bg-tolokaDark-mixed_20 text-tolokaDark-textColorLight h-full min-h-[200px] py-4 px-2 overflow-y-auto overflow-x-hidden rounded-md border-0 outline-0"
 				placeholder="Напишіть щось..."
 				renderElement={renderElement}
 				renderLeaf={renderLeaf}
